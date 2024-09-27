@@ -1,0 +1,41 @@
+{
+    "private": true,
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build"
+    },
+    "devDependencies": {
+        "@tailwindcss/forms": "^0.4.0",
+        "@tailwindcss/typography": "^0.5.0",
+        "@vue/compiler-sfc": "^3.0.5",
+        "axios": "^0.21",
+        "laravel-echo": "^1.15.0",
+        "laravel-mix": "^6.0.6",
+        "lodash": "^4.17.19",
+        "postcss": "^8.4.21",
+        "postcss-import": "^12.0.1",
+        "pusher-js": "^8.0.1",
+        "tailwindcss": "^3.0.0",
+        "vue": "^3.2.31",
+        "vue-loader": "^16.1.2"
+    },
+    "dependencies": {
+        "@chenfengyuan/vue-countdown": "^2.0.0",
+        "@headlessui/vue": "^1.5.0",
+        "@heroicons/vue": "^1.0.6",
+        "@inertiajs/vue3": "^1.0.0",
+        "@vitejs/plugin-vue": "^4.0.0",
+        "@vuepic/vue-datepicker": "^3.0.0",
+        "autoprefixer": "^10.4.13",
+        "filepond": "^4.30.3",
+        "filepond-plugin-file-validate-size": "^2.2.5",
+        "filepond-plugin-file-validate-type": "^1.2.6",
+        "filepond-plugin-image-preview": "^4.6.11",
+        "heroicons": "^1.0.6",
+        "laravel-vite-plugin": "^0.7.4",
+        "moment": "^2.29.2",
+        "vite": "^4.1.1",
+        "vue-filepond": "^7.0.3",
+        "vue3-popper": "^1.4.2"
+    }
+}

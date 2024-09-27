@@ -1,0 +1,9 @@
+*.sql
+
+.git
+.git*
+.dockerignore
+docker-*
+Dockerfile*
+
+.editorconfig

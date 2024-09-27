@@ -1,0 +1,60 @@
+FROM php:7.4.33-fpm-buster
+
+LABEL maintainer="Eskie Maquilang"
+LABEL version="1.2"
+LABEL description="PHP 7.4.33-FPM for Laravel Application"
+
+ENV HTML_PATH=portal
+
+RUN apt update
+RUN apt-get install -y libzip-dev zip unzip curl \
+    libpng-dev libonig-dev \
+    libxml2-dev libbz2-dev libsodium-dev \
+    libicu-dev
+
+# Install NodeJS
+RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
+RUN apt-get install -yq nodejs
+
+# Installing pcntl
+RUN docker-php-ext-configure pcntl --enable-pcntl \
+  && docker-php-ext-install \
+    pcntl
+
+# Installing intl
+RUN docker-php-ext-configure intl \
+    && docker-php-ext-install intl
+
+RUN docker-php-ext-install \
+    zip pdo_mysql \
+    gd mbstring xml \
+    bz2 sodium exif
+    
+# Clear cache
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Install composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+# Copy existing application directory contents
+WORKDIR /var/html/${HTML_PATH}
+COPY --chown=33:33 . /var/html/${HTML_PATH}
+RUN chown -R 33:33 /var/html/${HTML_PATH}
+RUN mkdir /var/www/.npm
+RUN chown -R 33:33 /var/www/.npm
+
+# Copy Configuration
+COPY docker/php.ini /usr/local/etc/php/conf.d/php.ini
+
+# Change current user to www
+USER www-data
+RUN composer install
+RUN npm install
+# RUN npm run build
+
+# Final Run, Manual
+# php artisan key:generate
+# php artisan migrate:refresh --seed
+
+EXPOSE 9000
+CMD ["php-fpm"]
